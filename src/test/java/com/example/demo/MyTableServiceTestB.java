@@ -10,13 +10,13 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Collections;
 
 @SpringBootTest
+@Transactional
 class MyTableServiceTestB {
 
     @Autowired
     MyTableService service;
 
     @Test
-    @Transactional
     void delete() {
         service.removeBatchByIds(Collections.singletonList(10001));
         Assertions.assertNull(service.getById(10001));

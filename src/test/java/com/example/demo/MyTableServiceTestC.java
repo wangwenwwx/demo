@@ -13,6 +13,7 @@ import java.util.Collections;
 
 @Slf4j
 @SpringBootTest
+@Transactional
 class MyTableServiceTestC {
     @Autowired
     MyTableService service;
@@ -21,7 +22,6 @@ class MyTableServiceTestC {
     TestFeign feign;
 
     @Test
-    @Transactional
     void delete() {
         service.removeBatchByIds(Collections.singletonList(10001));
         Assertions.assertNull(service.getById(10001));

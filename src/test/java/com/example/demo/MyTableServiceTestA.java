@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Collections;
 
 @SpringBootTest
+@Transactional
 public class MyTableServiceTestA {
 
     @MockBean
@@ -20,7 +21,6 @@ public class MyTableServiceTestA {
     MyTableService service;
 
     @Test
-    @Transactional
     void delete() {
         service.removeBatchByIds(Collections.singletonList(10001));
         Assertions.assertNull(service.getById(10001));

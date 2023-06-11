@@ -1,6 +1,5 @@
 package com.example.demo.conf;
 
-import com.baomidou.mybatisplus.core.metadata.TableInfo;
 import com.baomidou.mybatisplus.core.metadata.TableInfoHelper;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +10,17 @@ import org.springframework.test.context.event.PrepareTestInstanceEvent;
 import java.lang.reflect.Field;
 
 //@Component
-public class MybatisConfig {
+public class MybatisTestConfig {
 
     @Autowired
     SqlSessionFactory factory;
+
+    /**
+     * 监听每个测试方法前的事件
+     * @param event 事件
+     */
     @EventListener()
-    public void customize(PrepareTestInstanceEvent event)  {
+    public void setConfiguration(PrepareTestInstanceEvent event)  {
         TableInfoHelper.getTableInfos().forEach(tableInfo -> {
             try {
                 Field field = tableInfo.getClass().getDeclaredField("configuration");
